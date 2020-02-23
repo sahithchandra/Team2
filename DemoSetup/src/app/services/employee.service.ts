@@ -20,7 +20,7 @@ export class EmployeeService {
   fetchEmployeeDetails: string = serviceUrl + "/demo/getEmployees";
   saveEmployeeDetails: string=   serviceUrl+"/demo/saveEmployees";
 
-  console.log("hahaha");
+  
   constructor(private http: HttpClient) { }
 
   fetchDetails() : Observable<Array<Employee>> {
