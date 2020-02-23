@@ -24,6 +24,7 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
 
   fetchDetails() : Observable<Array<Employee>> {
+    console.log("Fetching Employee Details");
     return this.http.get<Array<Employee>>(this.fetchEmployeeDetails);
   }
 
