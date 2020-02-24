@@ -13,7 +13,7 @@ public class EmployeeService {
 
 	public List<Employee> getAllEmployees() {
 
-		System.out.println("Fetching Employee Details");
+		System.out.println("Employee Details");
 		return employeeRepository.findAll();
 
 	}
