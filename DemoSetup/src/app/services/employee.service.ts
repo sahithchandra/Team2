@@ -25,8 +25,7 @@ export class EmployeeService {
 
   fetchDetails() : Observable<Array<Employee>> {
     console.log("Fetching Employee Details");
-    console.log("Employee Details");   
-    console.log("Employeeeeee");   
+    console.log("Employee Details");  
     return this.http.get<Array<Employee>>(this.fetchEmployeeDetails);
   }
 
