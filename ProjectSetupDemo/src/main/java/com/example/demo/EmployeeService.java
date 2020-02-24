@@ -13,6 +13,7 @@ public class EmployeeService {
 
 	public List<Employee> getAllEmployees() {
 
+		System.out.println("Fetching Employee Details");
 		return employeeRepository.findAll();
 
 	}
