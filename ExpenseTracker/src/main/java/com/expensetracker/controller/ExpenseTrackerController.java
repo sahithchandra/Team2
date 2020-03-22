@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.expensetracker.entity.Response;
 import com.expensetracker.entity.User;
 import com.expensetracker.entity.UserDTO;
 import com.expensetracker.service.ExpenseTrackerService;
@@ -25,47 +26,52 @@ public class ExpenseTrackerController {
 	@PostMapping("/signup")
 	public ResponseEntity<?> signUp(@RequestBody UserDTO userDTO) {
 
-		Predicate<UserDTO> p = u -> u.getPassword().equals(u.getConfirmPassword());
-		if (p.test(userDTO)) {
+		Response response = new Response();
 
-			User user = null;
-			try {
-				user = expenseTrackerService.signUp(userDTO);
-			} catch (Exception e) {
-				return new ResponseEntity<String>("Email_Id Already exists.Please choose a different one !!",
-						HttpStatus.OK);
-			}
-
-			return new ResponseEntity<String>(user.getUserName() + " succesfully Registered", HttpStatus.OK);
-		} else {
-			return new ResponseEntity<String>("Password and Confirm Password doesn't match.Please Check !!",
-					HttpStatus.OK);
+		User user = null;
+		try {
+			user = expenseTrackerService.signUp(userDTO);
+		} catch (Exception e) {
+			// 1-> Email_Id Already exists.Please choose a different one !!
+			response.setIndicator(false);
+			response.setMessage("1");
+			return new ResponseEntity<Response>(response, HttpStatus.OK);
 		}
+		if (user != null) {
+			// 0- success
+			response.setIndicator(true);
+			response.setMessage("0");
 
+		}
+		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> signin(@RequestBody UserDTO userDTO) {
 
 		User user = null;
-		String message = "";
-
+		Response response = new Response();
 		try {
 			user = expenseTrackerService.signIn(userDTO);
 			Predicate<String> p = s -> s.equalsIgnoreCase(userDTO.getPassword());
 
 			if (p.test(user.getPassword())) {
-				message = user.getUserName() + " Successfully signs in!!";
+				response.setIndicator(true);
+				response.setMessage("0");
 			} else {
-				message = "Password doesn't match!!";
+				// 2- Password doesn't match!!
+				response.setIndicator(false);
+				response.setMessage("2");
 			}
 
 		} catch (Exception e) {
-			return new ResponseEntity<String>(userDTO.getEmail() + " not Found. Please Signup before signing in!!",
-					HttpStatus.OK);
+			// 3- email not found.Please Signup before signing in
+			response.setIndicator(false);
+			response.setMessage("3");
+			return new ResponseEntity<Response>(response, HttpStatus.OK);
 		}
 
-		return new ResponseEntity<String>(message, HttpStatus.OK);
+		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 
 }
