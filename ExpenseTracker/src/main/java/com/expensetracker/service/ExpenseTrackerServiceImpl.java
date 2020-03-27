@@ -19,16 +19,14 @@ public class ExpenseTrackerServiceImpl implements ExpenseTrackerService {
 		User user = new User();
 		user.setEmail(userDTO.getEmail());
 		user.setPassword(userDTO.getPassword());
-		user.setUserName(userDTO.getUserName());
+		user.setUserName(userDTO.getUsername());
 		user = expenseTrackerDAO.signUp(user);
 		return user;
 	}
 
 	@Override
 	public User signIn(UserDTO userDTO) throws Exception {
-		// String password = "";
 		return expenseTrackerDAO.signIn(userDTO.getEmail());
-		// return password;
 	}
 
 }

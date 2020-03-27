@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ import com.expensetracker.service.ExpenseTrackerService;
 
 @RestController
 @EnableJpaRepositories(basePackages = "com.expensetracker.dao")
-
+@CrossOrigin(origins = "http://localhost:4200")
 public class ExpenseTrackerController {
 
 	@Autowired
@@ -26,6 +27,9 @@ public class ExpenseTrackerController {
 	@PostMapping("/signup")
 	public ResponseEntity<?> signUp(@RequestBody UserDTO userDTO) {
 
+		System.out.println("Received UserName for Registering:" + userDTO.getUsername());
+		System.out.println("Received Email for Registering:" + userDTO.getEmail());
+
 		Response response = new Response();
 
 		User user = null;
@@ -33,12 +37,14 @@ public class ExpenseTrackerController {
 			user = expenseTrackerService.signUp(userDTO);
 		} catch (Exception e) {
 			// 1-> Email_Id Already exists.Please choose a different one !!
+			System.err.println(" Email_Id Already exists.Please choose a different one !!");
 			response.setIndicator(false);
 			response.setMessage("1");
 			return new ResponseEntity<Response>(response, HttpStatus.OK);
 		}
 		if (user != null) {
 			// 0- success
+			System.out.println("User Succesfully Registered!!");
 			response.setIndicator(true);
 			response.setMessage("0");
 
@@ -49,23 +55,29 @@ public class ExpenseTrackerController {
 	@PostMapping("/signin")
 	public ResponseEntity<?> signin(@RequestBody UserDTO userDTO) {
 
+		System.out.println("Received Email for Logging In:" + userDTO.getEmail());
+
 		User user = null;
 		Response response = new Response();
+
 		try {
 			user = expenseTrackerService.signIn(userDTO);
 			Predicate<String> p = s -> s.equalsIgnoreCase(userDTO.getPassword());
 
 			if (p.test(user.getPassword())) {
+				System.out.println("User Succesfully Logs In!!");
 				response.setIndicator(true);
 				response.setMessage("0");
 			} else {
 				// 2- Password doesn't match!!
+				System.err.println("Password doesn't match!!");
 				response.setIndicator(false);
 				response.setMessage("2");
 			}
 
 		} catch (Exception e) {
 			// 3- email not found.Please Signup before signing in
+			System.err.println("Email not found.Please Signup before logging in!!");
 			response.setIndicator(false);
 			response.setMessage("3");
 			return new ResponseEntity<Response>(response, HttpStatus.OK);
