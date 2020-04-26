@@ -8,12 +8,16 @@ import { LoginComponent } from './features/login/component/login.component';
 import { LoginService } from './features/login/service/login.service';
 import { SignUpComponent } from './features/signup/component/signup.component';
 import { SignUpService } from './features/signup/service/signup.service';
+import { ExpenseTrackerComponent } from './features/expense-tracker/component/expense-tracker.component';
+import { ExpenseTrackerService } from './features/expense-tracker/service/expense-tracker.service';
+import { CurrencyPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    ExpenseTrackerComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +26,7 @@ import { SignUpService } from './features/signup/service/signup.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [LoginService, SignUpService],
+  providers: [LoginService, SignUpService, ExpenseTrackerService, CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

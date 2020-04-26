@@ -19,8 +19,8 @@
                 </div>
                 <div class="field space ">
                     <span class="fa fa-lock "></span>
-                    <input #z type="password" class="pass-key " required placeholder="Password " formControlName="password">
-                    <span class="show " (click)="z.type==='password ' ? z.type='text ' : z.type='password'">SHOW</span>
+                    <input class="form-control" #y type="password" class="pass-key" required placeholder="Password" formControlName="password">
+                    <span class="show" (click)="y.type === 'password' ? y.type = 'text' : y.type = 'password'">SHOW</span>
                 </div>
                 <div class="field">
                     <button type="submit" [disabled]="!loginFormbuilder.valid">LOGIN</button>

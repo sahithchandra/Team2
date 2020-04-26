@@ -45,9 +45,9 @@ export class LoginComponent implements OnInit {
 
     this.loginService.login(userDTO).subscribe((response: any)=>{
       this.spinner = false;
-      console.log(response);
       if(response.indicator) {
-        alert('Login Successful');
+        this.router.navigate(['/ExpenseTracker']);
+        window.localStorage.setItem('email', this.loginFormbuilder.value.email);
       }else {
         if(response.message == 3) {
           alert('The email you enter is not registered with us.');
