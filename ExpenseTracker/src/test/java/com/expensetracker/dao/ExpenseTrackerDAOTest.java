@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.expensetracker.entity.Category;
 import com.expensetracker.entity.User;
 
 @RunWith(MockitoJUnitRunner.class)

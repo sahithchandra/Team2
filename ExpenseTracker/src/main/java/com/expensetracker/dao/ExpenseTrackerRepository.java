@@ -13,4 +13,5 @@ public interface ExpenseTrackerRepository extends JpaRepository<User, Integer> {
 	@Query("Select u from User u where u.email=:email")
 	public User signIn(@Param("email") String email) throws Exception;
 
+	
 }
