@@ -1,0 +1,72 @@
+<div class="bg-img">
+    <div class="content" [ngStyle]="spinner && {'width':'130px'}">
+
+        <div *ngIf="spinner " class="spinner spinner-circle "></div>
+
+        <ng-container *ngIf="!spinner">
+            <header>
+                <img src="../../../../assets/images/expense logo.PNG " />
+            </header>
+            <app-nav-bar></app-nav-bar>
+            <header style=' color: black; font-size: 25px; font-weight: 600; margin: 0 0 15px 0; font-family: "Montserrat ", sans-serif; '>
+                Split Expenses
+            </header>
+
+            <form [formGroup]="splitExpenseFormBuilder">
+                <span *ngIf="errorMessage != ''" style="color: red;">{{errorMessage}}</span>
+
+                <div class="field space">
+                    <input class="form-control" type="email" required placeholder="abc@domain.com" formControlName="email">
+                    <button style="border: none; width: 25%;font-size: 15px;height: 30px;" type="submit" (click)="addEmail()">Add</button>
+                </div>
+
+                <div class="field ">
+                    <select formControlName="category" style="width: 100%;">
+                    <option [value]='null'>Select A Category</option >
+                    <option *ngFor="let category of categories">{{category}}</option>
+                  </select>
+                </div>
+
+                <div class="field space">
+                    <input class="form-control" (keypress)="keyPress($event)" type="text" class="pass-key" required placeholder="Add a budget" formControlName="budgetTotal">
+                </div>
+
+
+                <div class="field space" style="margin-bottom: 0px; margin-top: 5px; height: 20px; position: relative; bottom: 20px; color: red;">
+                    <h6>*Please add atleast 1 Expense.</h6>
+                </div>
+            </form>
+
+            <div class="container fade-in" style="position: fixed;
+            top: 0;
+            height: 673px;
+            width: 400px;
+            left: 400px;" *ngIf="emailArray.length > 0">
+                <div class="col-xs-12">
+
+                    <body>
+                        <div class="table-title">
+                            <h3>Email list</h3>
+                        </div>
+                        <table class="table-fill">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-hover">
+                                <tr *ngFor="let item of emailArray; let i = index;">
+                                    <td class="text-left">{{item}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </body>
+                </div>
+            </div>
+
+
+            <div class="field" style="width: 100%; margin-top: 60px">
+                <button type="submit" (click)="onSubmit()">Finished</button>
+            </div>
+        </ng-container>
+    </div>

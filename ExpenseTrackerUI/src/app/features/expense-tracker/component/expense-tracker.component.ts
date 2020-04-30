@@ -31,6 +31,13 @@ export class ExpenseTrackerComponent implements OnInit
             category: [null, [Validators.required]],
             budget: [null, [Validators.required]]
         });
+
+        this.expenseService.getUserExpenses().subscribe((data: ExpenseTracker.ExpenseDTO[]) => {
+            if(data) {
+                this.budgetArray = data;
+                this.spinner = false;
+            }
+        });
         
         this.expenseService.getExpenseCategory().subscribe((data: string[])=> {
             if(data) {
@@ -43,7 +50,14 @@ export class ExpenseTrackerComponent implements OnInit
 
     public removeItem(index:number) {
         this.budgetArray.splice(index,1);
+        this.expenseService.getUserExpenses().subscribe((data: ExpenseTracker.ExpenseDTO[]) => {
+            if(data) {
+                this.budgetArray = data;
+                this.spinner = false;
+            }
+        });
     }
+
     public addItem() {
         this.errorMessage = null;
         let item: ExpenseTracker.ExpenseDTO ={

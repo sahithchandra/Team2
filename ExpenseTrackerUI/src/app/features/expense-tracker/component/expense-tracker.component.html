@@ -7,6 +7,7 @@
             <header>
                 <img src="../../../../assets/images/expense logo.PNG " />
             </header>
+            <app-nav-bar></app-nav-bar>
             <header style=' color: black; font-size: 25px; font-weight: 600; margin: 0 0 15px 0; font-family: "Montserrat ", sans-serif; '>
                 Track Your Expenses
             </header>
@@ -55,7 +56,7 @@
                             <tbody class="table-hover">
                                 <tr *ngFor="let item of budgetArray; let i = index;">
                                     <td class="text-left">{{item.name}}</td>
-                                    <td class="text-left">{{item.budget | currency}} <i style="float: right;" class="fa fa-times" (click)="removeItem(i)"></i></td>
+                                    <td class="text-left">{{item.budget | currency}}<i class="fa fa-times" (click)="removeItem(i)" style="float: right;"></i></td>
                                 </tr>
                             </tbody>
                         </table>

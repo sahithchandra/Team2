@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       if(response.indicator) {
         this.router.navigate(['/ExpenseTracker']);
         window.localStorage.setItem('email', this.loginFormbuilder.value.email);
-      }else {
+      } else {
         if(response.message == 3) {
           alert('The email you enter is not registered with us.');
         } else if(response.message == 2) {

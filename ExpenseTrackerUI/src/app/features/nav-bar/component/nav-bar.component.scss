@@ -1,0 +1,39 @@
+ul {
+    padding: 15px 0px;
+    margin: 0px 0px 20px 0px;
+}
+
+li {
+    display:inline;
+    padding:15px 8px;
+    position:relative;
+}
+
+li:hover {
+    cursor:pointer;
+}
+
+li:hover:after {
+    border-top:rgb(0, 95, 158);
+}
+
+li .current {
+    border-bottom: 3px solid rgb(0, 95, 158);
+}
+
+li .current:after {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid rgb(0, 95, 158);
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 43%;
+}
+
+a {
+    padding:6px 0px;
+    text-decoration: none;
+}

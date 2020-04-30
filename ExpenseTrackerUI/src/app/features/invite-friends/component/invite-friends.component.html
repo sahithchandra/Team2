@@ -1,0 +1,36 @@
+<div class="bg-img">
+    <div class="content" [ngStyle]="spinner && {'width':'130px'}">
+
+        <div *ngIf="spinner " class="spinner spinner-circle "></div>
+
+        <ng-container *ngIf="!spinner">
+            <header>
+                <img src="../../../../assets/images/expense logo.PNG " />
+            </header>
+            <app-nav-bar></app-nav-bar>
+            <header style=' color: black; font-size: 25px; font-weight: 600; margin: 0 0 15px 0; font-family: "Montserrat ", sans-serif; '>
+                Invite Friends
+            </header>
+
+            <form [formGroup]="inviteFriendsFormbuilder">
+                <span *ngIf="errorMessage != ''" style="color: red;">{{errorMessage}}</span>
+
+                <div class="field space">
+                    <input class="form-control" type="email" required placeholder="abc@domain.com" formControlName="emails">
+                </div>
+
+
+                <div class="field space" style="margin-bottom: 0px; margin-top: 5px; height: 20px; position: relative; bottom: 20px; color: red;">
+                    <h6>*Please add atleast 1 email ID.</h6>
+                </div>
+
+                <div class="field">
+                    <button style="border: none; width: 25%;font-size: 15px;height: 30px;" type="submit" [disabled]="!inviteFriendsFormbuilder.valid" (click)="addEmail()">Add</button>
+                </div>
+            </form>
+
+            <div class="field" style="width: 100%; margin-top: 60px">
+                <button type="submit" [disabled]="emailArray.length == 0" (click)="onSubmit()">Finished</button>
+            </div>
+        </ng-container>
+    </div>

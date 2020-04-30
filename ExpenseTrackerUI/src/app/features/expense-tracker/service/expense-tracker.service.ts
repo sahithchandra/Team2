@@ -17,14 +17,23 @@ export class ExpenseTrackerService {
     let categories: string[] = [
         "Entertainment" , "Food", "Health", "Housing", "Insurance", "Miscellaneous","Personal", "Saving", "Transportation", "Utilities"
     ]
-    return of(categories);
-    // return this.http.request('GET',`${this.baseUrl}/getCategories`);
+    //return of(categories);
+     return this.http.request('GET',`${this.baseUrl}/getCategories`);
   }
 
-
   public addExpenses(expenseDTO: any) : Observable<any> {
-    //return of(true);
-    return this.http.request('POST',`${this.baseUrl}/setBudget`, { body: expenseDTO });
+    //return of({indicator: true, message: 1 });
+     return this.http.request('POST',`${this.baseUrl}/setBudget`, { body: expenseDTO });
+  }
+
+  public getUserExpenses() : Observable<any> {
+    let expenseList : ExpenseTracker.ExpenseDTO[] = [
+      {name : "Entertainment", budget : 12},
+      {name : "Food", budget : 12},
+      {name : "Health", budget : 12},
+    ];
+    //return of(expenseList);
+     return this.http.request('GET', `${this.baseUrl}/getUserExpenses`);
   }
 
 }

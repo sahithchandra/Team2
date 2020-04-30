@@ -14,8 +14,8 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   public login(userDTO: Login.LoginDTO) : Observable<any> {
-    return of({indicator: true, message: 0});
-    //return this.http.request('POST',`${this.baseUrl}/signin`, { body: userDTO });
+    //return of({indicator: true, message: 0});
+    return this.http.request('POST',`${this.baseUrl}/signin`, { body: userDTO });
   }
 
 }
