@@ -102,7 +102,7 @@ public class ExpenseTrackerServiceImpl implements ExpenseTrackerService {
 
 		String friendsEmail = addFriendsDTO.getEmail();
 		for (String email : addFriendsDTO.getEmails()) {
-			emailUtil.sendEmail(email, "Invitation", friendsEmail + " has invited to join in his group");
+			emailUtil.sendEmail(email, "Invitation", friendsEmail + " has invited to join in their group");
 		}
 	}
 
@@ -143,6 +143,19 @@ public class ExpenseTrackerServiceImpl implements ExpenseTrackerService {
 			updatedFlag = false;
 		}
 		return updatedFlag;
+	}
+
+	@Override
+	public int deleteBudget(CategoryDTO categoryDTO) throws Exception {
+
+		return expenseTrackerDAO.deleteBudget(categoryDTO.getEmail(), categoryDTO.getCategories().get(0).getName(),categoryDTO.getCategories().get(0).getBudget());
+
+	}
+
+	@Override
+	public List<Category> retriveCategories(String email) {
+		
+		return expenseTrackerDAO.retriveCategories(email);
 	}
 
 }

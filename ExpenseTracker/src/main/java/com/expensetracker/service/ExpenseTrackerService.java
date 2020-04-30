@@ -3,6 +3,7 @@ package com.expensetracker.service;
 import java.util.List;
 
 import com.expensetracker.entity.AddFriendsDTO;
+import com.expensetracker.entity.Category;
 import com.expensetracker.entity.CategoryDTO;
 import com.expensetracker.entity.SplitExpensesDTO;
 import com.expensetracker.entity.User;
@@ -27,5 +28,9 @@ public interface ExpenseTrackerService {
 	public void sendInvites(AddFriendsDTO addFriendsDTO)throws Exception;
 
 	public Boolean splitExpenses(SplitExpensesDTO splitExpensesDTO)throws Exception;
+
+	public int deleteBudget(CategoryDTO categoryDTO)throws Exception;
+
+	public List<Category> retriveCategories(String email);
 		
 }

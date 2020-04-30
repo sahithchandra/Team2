@@ -58,6 +58,15 @@ public class ExpenseTrackerDAO {
 		return categoryRepository.checkEmail(email,name);
 		
 	}
+
+	public int deleteBudget(String email, String name,Double budget) {
+		return categoryRepository.deleteBudget(email,name,budget);
+	}
+
+	public List<Category> retriveCategories(String email) {
+		
+		return categoryRepository.retriveCategories(email);
+	}
 	
 
 }

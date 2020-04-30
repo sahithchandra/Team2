@@ -24,6 +24,15 @@ public interface CategoryRepository extends CrudRepository<Category, Integer>{
 	
 	@Query("Select c from Category c where c.email=:email and c.name=:name")
 	public Category checkEmail(@Param("email") String email,@Param("name") String name) throws Exception;
+
+	@Transactional
+	@Modifying
+	@Query("DELETE FROM Category c WHERE c.email = :email and c.name = :name and c.budget=:budget")
+	public int deleteBudget(@Param("email")String email,@Param("name") String name,@Param("budget") Double budget);
+
+
+	@Query("Select c from Category c where c.email=:email")
+	public List<Category> retriveCategories(@Param("email") String email);
 	
 	
 	
